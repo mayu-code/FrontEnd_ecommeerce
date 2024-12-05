@@ -1,0 +1,19 @@
+import React from 'react'
+import HomePage from './normal/HomePage'
+import Nav from './normal/Nav'
+
+function Home() {
+  return (
+    <div className='flex flex-col mx-10 my-10'>
+    <div>
+      <Nav/>
+    </div>
+    <div>
+      <HomePage/>
+    </div>
+    <div></div>
+</div>
+  )
+}
+
+export default Home
