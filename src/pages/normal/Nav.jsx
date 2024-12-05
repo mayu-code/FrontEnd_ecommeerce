@@ -12,6 +12,7 @@ const Nav = () => {
           E-Shop
         </Link>
             <CategorySelector/>
+            
         {/* Login Button */}
         <Link
           to="/login"
