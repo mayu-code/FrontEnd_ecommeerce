@@ -1,19 +1,20 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CategorySelector = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSubcategoryOpen, setIsSubcategoryOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Sample categories and subcategories data
   const categories = {
-    Electronics: ["Mobile Phones", "Laptops", "Cameras"],
+    Electronics: ["Headphones", "Laptops", "Cameras"],
     Fashion: ["Men's Clothing", "Women's Clothing", "Accessories"],
     Home: ["Furniture", "Kitchen", "Decor"],
   };
 
-  // Refs to close dropdowns when clicking outside
   const categoryRef = useRef(null);
   const subcategoryRef = useRef(null);
 
@@ -27,6 +28,11 @@ const CategorySelector = () => {
   const handleSubcategoryChange = (subcategory) => {
     setSelectedSubcategory(subcategory);
     setIsSubcategoryOpen(false); // Close subcategory dropdown
+
+    // Redirect to SelectedProduct page after both are selected
+    navigate("/selectproduct", {
+      state: { category: selectedCategory, subcategory },
+    });
   };
 
   const clearSelection = () => {
@@ -34,9 +40,9 @@ const CategorySelector = () => {
     setSelectedSubcategory(null);
     setIsCategoryOpen(false);
     setIsSubcategoryOpen(false);
+    navigate("/");
   };
 
-  // Close dropdowns if clicked outside
   const handleClickOutside = (e) => {
     if (categoryRef.current && !categoryRef.current.contains(e.target)) {
       setIsCategoryOpen(false);
@@ -47,10 +53,7 @@ const CategorySelector = () => {
   };
 
   React.useEffect(() => {
-    // Add event listener for clicks outside the dropdowns
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Clean up the event listener on unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -139,35 +142,33 @@ const CategorySelector = () => {
 
       {/* Selected Data Section */}
       <div className="flex flex-col items-end">
-        <div className="flex flex-row ">
-        <div className="mx-2">
-
-        {selectedCategory && (
-          <div className="text-right">
-            <span className="font-medium text-gray-700">
-              Category: {selectedCategory}
-            </span>
+        <div className="flex flex-row">
+          <div className="mx-2">
+            {selectedCategory && (
+              <div className="text-right">
+                <span className="font-medium text-gray-700">
+                  Category: {selectedCategory}
+                </span>
+              </div>
+            )}
+            {selectedSubcategory && (
+              <div className="text-right">
+                <span className="font-medium text-gray-700">
+                  Subcategory: {selectedSubcategory}
+                </span>
+              </div>
+            )}
           </div>
-        )}
-        {selectedSubcategory && (
-          <div className="text-right">
-            <span className="font-medium text-gray-700">
-              Subcategory: {selectedSubcategory}
-            </span>
+          <div className="mx-2">
+            {(selectedCategory || selectedSubcategory) && (
+              <button
+                onClick={clearSelection}
+                className="mt-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600"
+              >
+                Clear
+              </button>
+            )}
           </div>
-        )}
-        </div>
-        <div className="mx-2">
-
-        {(selectedCategory || selectedSubcategory) && (
-          <button
-            onClick={clearSelection}
-            className="mt-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600"
-          >
-            Clear
-          </button>
-        )}
-        </div>
         </div>
       </div>
     </div>

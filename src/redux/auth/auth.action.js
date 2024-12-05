@@ -6,12 +6,25 @@ import { Api, API_BASE_URL } from "../../config/api";
  export const loginUserAction=(loginData)=>async(dispatch)=>{
     dispatch({type:LOGIN_REQUEST})
     try{
-        const {data} = await axios.post(`${API_BASE_URL}/auth/signin`,loginData.data);
-        if(data.token){
-            localStorage.setItem("jwt",data.token);
+        const {data} = await axios.post(`${API_BASE_URL}/auth/user/login`,loginData.data);
+        if(data){
+            localStorage.setItem("jwt",data);
             
         }
-        console.log(data)
+        dispatch({type:LOGIN_SUCCESS,payload:data.token})
+    }catch(error){
+        dispatch({type:LOGIN_FAILURE,payload:error})
+    }
+}
+
+export const registerUserAction=(registerData)=>async(dispatch)=>{
+    dispatch({type:LOGIN_REQUEST})
+    try{
+        const {data} = await axios.post(`${API_BASE_URL}/auth/user/register`,registerData.data);
+        if(data){
+            localStorage.setItem("jwt",data);
+            
+        }
         dispatch({type:LOGIN_SUCCESS,payload:data.token})
     }catch(error){
         dispatch({type:LOGIN_FAILURE,payload:error})
@@ -22,7 +35,7 @@ export const GetUserProfile=(jwt)=>async(dispatch)=>{
     dispatch({type:GET_PROFILE_REQUEST})
     try{
         const {data} = await axios.get(
-            `${API_BASE_URL}/api/user/profile`,
+            `${API_BASE_URL}/user/getUser`,
             {
                 headers:{
                     "Authorization":`Bearer ${jwt}`
@@ -39,7 +52,7 @@ export const GetUserProfile=(jwt)=>async(dispatch)=>{
 export const UpdateUserProfile=(reqData)=>async(dispatch)=>{
     dispatch({type:UPDATE_PROFILE_REQUEST})
     try{
-        const {data} = await Api.post(`${API_BASE_URL}/api/user/Update`,reqData)
+        const {data} = await Api.post(`${API_BASE_URL}/user/`,reqData)
         
         console.log(data)
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data})
