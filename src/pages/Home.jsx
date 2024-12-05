@@ -1,6 +1,8 @@
 import React from 'react'
 import HomePage from './normal/HomePage'
 import Nav from './normal/Nav'
+import { Route, Routes } from 'react-router-dom'
+import Login from '../conponents/auth/Login'
 
 function Home() {
   return (
@@ -9,7 +11,11 @@ function Home() {
       <Nav/>
     </div>
     <div>
-      <HomePage/>
+      <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/login" element={<Login/>}/>
+      </Routes>
+
     </div>
     <div></div>
 </div>
