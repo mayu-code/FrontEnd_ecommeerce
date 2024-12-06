@@ -4,7 +4,6 @@ function ProductDetail() {
   return (
     <>
     <div>ProductDetail</div>
-    <h1>jsdcds</h1>
     </>
   )
 }
