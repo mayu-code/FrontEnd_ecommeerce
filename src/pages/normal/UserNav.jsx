@@ -47,7 +47,7 @@ const UserNav = () => {
             </Link>
           </div>
           <div className="text-center">
-            <p className="font-semibold capitalize text-white">{auth.user.name}</p>
+            <p className="font-semibold capitalize text-white">{auth.user.name.trim().split(' ')[0]}</p>
           </div>
         </div>
       </div>
