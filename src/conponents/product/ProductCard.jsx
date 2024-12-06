@@ -58,13 +58,13 @@ const ProductCard = ({ product }) => {
         <div className="flex flex-row space-x-2">
         <button
           onClick={addCartHandler}
-          className="mt-4 w-[50%] bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+          className="mt-4 w-[50%] bg-blue-500 text-white py-1 rounded-lg hover:bg-blue-600"
         >
           Add to Cart
         </button>
         <button
           onClick={addOrderHandler}
-          className="mt-4 w-[50%] bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+          className="mt-4 w-[50%] bg-green-500 text-white py-1 rounded-lg hover:bg-green-600"
         >
           Buy Now
         </button>

@@ -7,8 +7,8 @@ import { GetUserProfile } from "../../redux/auth/auth.action";
 
 const UserNav = () => {
 
-  
-  const {auth} = useSelector(store=>store)
+
+  const { auth } = useSelector(store => store)
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
 
@@ -19,21 +19,30 @@ const UserNav = () => {
   }, [jwt])
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-blue-950 shadow-md">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-blue-500">
-          E-Shop
-        </Link>
-            <CategorySelector/>
-            
-        {/* Login Button */}
-        <Link
-          to="/user/profile"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-        >
-          Profile
-        </Link>
+        <div>
+          <div className="flex flex-row gap-3">
+
+            {/* Logo */}
+            <Link to="/" className="text-xl font-bold text-blue-500">
+              E-Shop
+            </Link>
+
+            <CategorySelector />
+
+          </div>
+        </div>
+        <div>
+
+          {/* Login Button */}
+          <Link
+            to="/user/profile"
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          >
+            Profile
+          </Link>
+        </div>
       </div>
     </nav>
   );

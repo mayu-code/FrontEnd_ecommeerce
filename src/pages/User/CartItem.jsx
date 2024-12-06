@@ -51,7 +51,7 @@ const CartItem = ({ item, index }) => {
 
   return (
     <div className="border-b py-4 flex flex-row justify-between">
-      <div className='flex flex-row'>
+      <div className='flex flex-row gap-1'>
         <div>
           <h4>{index + 1}.</h4>
         </div>

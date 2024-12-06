@@ -4,8 +4,6 @@ import Nav from './normal/Nav'
 import { Route, Routes } from 'react-router-dom'
 import Login from '../conponents/auth/Login'
 import Profile from './User/Profile'
-import UserCart from './User/UserCart'
-import UserOrders from './User/UserOrder'
 import UserAccount from './User/UserAccount'
 import AdminProductList from './Admin/AdminProductList'
 import AdminUserList from './Admin/AdminUserList'
@@ -18,6 +16,7 @@ import { GetUserProfile } from '../redux/auth/auth.action'
 import Footer from './Footer'
 import AdminLogin from './Admin/AdminLogin'
 import UpdateProfile from '../conponents/auth/UpdateProfile'
+import UserOrders from './Admin/UserOrder'
 
 function Home() {
   const { auth } = useSelector(store => store)
@@ -30,7 +29,7 @@ function Home() {
     }
   }, [jwt])
   return (
-    <div className='flex flex-col mx-10 my-10'>
+    <div className='flex flex-col m-0 p-0'>
       <div>
         {auth.user ? <UserNav /> : <Nav />}
       </div>
