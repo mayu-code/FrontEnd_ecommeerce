@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {loginUserAction} from "../../redux/auth/auth.action";
+import { loginUserAction } from "../../redux/auth/auth.action";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // State to manage success/error messages
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // 'success' or 'error'
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">
-          Login
-        </h1>
+        <h1 className="text-2xl font-bold text-center text-blue-600 mb-6">Login</h1>
+
+        {/* Show success or error message */}
+        {message && (
+          <div className={`text-center py-2 px-4 rounded-lg mb-4 ${messageType === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+            {message}
+          </div>
+        )}
+        
         <Formik
           initialValues={{ email: "", password: "" }}
           validate={(values) => {
@@ -27,13 +38,25 @@ const Login = () => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              dispatch(loginUserAction({ data: values })).then(() => {
-                navigate("/");
+            dispatch(loginUserAction({ data: values }))
+              .then((data) => {
+                // Set success message when login is successful
+                setMessage("Login successful!");
+                setMessageType("success");
+
+                // Redirect to homepage after successful login
+                setTimeout(() => {
+                  navigate("/");
+                }, 2000); // Wait 2 seconds before redirecting
+
+                setSubmitting(false);
+              })
+              .catch((error) => {
+                // Set error message if login fails
+                setMessage("Login failed. Please check your credentials.");
+                setMessageType("error");
                 setSubmitting(false);
               });
-            }, 400);
           }}
         >
           {({
