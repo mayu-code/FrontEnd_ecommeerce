@@ -4,8 +4,6 @@ import Home from './pages/Home';
 import Login from './conponents/auth/Login';
 
 
-
-
 function App() {
 
   return (
@@ -13,7 +11,7 @@ function App() {
           <Routes>
               <Route path='/*' element={<Home/>}/>
          </Routes>
-       </BrowserRouter>
+    </BrowserRouter>
   )
 }
 

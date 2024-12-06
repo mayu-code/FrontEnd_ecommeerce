@@ -19,7 +19,7 @@ const Nav = () => {
   }, [jwt])
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="shadow-md bg-slate-500">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="text-xl font-bold text-blue-500">
