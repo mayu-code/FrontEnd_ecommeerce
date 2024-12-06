@@ -1,13 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { loginUserAction } from "../../redux/auth/auth.action";
+import { Link, useNavigate } from "react-router-dom";
+import {loginUserAction} from "../../redux/auth/auth.action";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
@@ -116,9 +115,9 @@ const Login = () => {
               <div className="text-center">
                 <p className="text-sm text-gray-600">
                   Don't have an account?{" "}
-                  <a href="/register" className="text-blue-500 hover:underline">
+                  <Link to="/register" className="text-blue-500 hover:underline">
                     Register here
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>

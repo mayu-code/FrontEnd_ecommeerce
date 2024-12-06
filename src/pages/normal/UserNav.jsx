@@ -5,7 +5,7 @@ import CategorySelector from "../../conponents/product/CategorySelector";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserProfile } from "../../redux/auth/auth.action";
 
-const Nav = () => {
+const UserNav = () => {
 
   
   const {auth} = useSelector(store=>store)
@@ -30,14 +30,14 @@ const Nav = () => {
             
         {/* Login Button */}
         <Link
-          to="/login"
+          to="/user/profile"
           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
         >
-          Login
+          Profile
         </Link>
       </div>
     </nav>
   );
 };
 
-export default Nav;
+export default UserNav;

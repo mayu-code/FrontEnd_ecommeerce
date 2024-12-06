@@ -4,7 +4,7 @@ import CartItem from './CartItem';
 // import OrderItem from './OrderItem';
 // import { useAuth } from '../contexts/ ';
 
-const UserProfile = () => {
+const Profile = () => {
   // const { user, logout } = useAuth();
 
   // const user="das", logout=null;
@@ -134,4 +134,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default Profile;
