@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetUserProfile } from "../../redux/auth/auth.action";
 import axios from "axios";
 import { API_BASE_URL } from "../../config/api";
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const [products, setProducts] = useState([]);
-  
-  // Loading state to check when the user data is available
+  const [cproducts, setcProducts] = useState([]);
+  const [oproducts, setOproducts] = useState([]);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user1, setUser1] = useState(null);
 
@@ -35,47 +36,40 @@ const Profile = () => {
   }, [auth.user]);
 
 
-  // Simulate fetching data (could be replaced with an API call)
+
 
   useEffect(()=>{
-    loadProducts();
+    loadcProducts();
+    loadOproducts();
   },[])
 
-  const loadProducts = async () => {
+  const loadcProducts = async () => {
     const result = await axios.get(`${API_BASE_URL}/user/cartproducts`,
             {
                 headers:{
                     "Authorization":`Bearer ${jwt}`
                 }
             });
-    setProducts(result.data); 
+    setcProducts(result.data); 
+
+  };
+  const loadOproducts = async () => {
+    const result = await axios.get(`${API_BASE_URL}/user/orderedproducts`,
+            {
+                headers:{
+                    "Authorization":`Bearer ${jwt}`
+                }
+            });
+    setOproducts(result.data); 
 
   };
 
-  const dummyOrders = [
-    {
-      id: 1,
-      date: "2024-12-01",
-      items: [
-        { id: 1, name: "Product 1", price: 20, quantity: 2 },
-        { id: 2, name: "Product 2", price: 15, quantity: 1 },
-      ],
-      total: 55,
-    },
-    {
-      id: 2,
-      date: "2024-11-15",
-      items: [{ id: 3, name: "Product 3", price: 30, quantity: 1 }],
-      total: 30,
-    },
-  ];
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    navigate('/');
+    window.location.reload();
+  };
 
-  const dummyCartItems = [
-    { id: 1, name: "Product 1", price: 20, quantity: 2 },
-    { id: 2, name: "Product 2", price: 15, quantity: 1 },
-  ];
-
-  const [cartItems, setCartItems] = useState(dummyCartItems);
 
   if (loading) {
     return <div>Loading...</div>; // You can show a loading spinner or message here
@@ -97,12 +91,14 @@ const Profile = () => {
           </div>
           <div className="flex flex-col justify-between">
             <div>
-              <button className="mt-4 bg-green-500 text-white p-2 rounded">
+              <Link to="/updateProfile" className="mt-4 bg-green-500 text-white p-2 rounded">
                 Update
-              </button>
+              </Link>
             </div>
             <div>
-              <button className="mt-4 bg-red-500 text-white p-2 rounded">
+              <button
+               onClick={handleLogout}
+               className="mt-4 bg-red-500 text-white p-2 rounded">
                 Logout
               </button>
             </div>
@@ -113,9 +109,9 @@ const Profile = () => {
       {/* My Orders Section */}
       <section className="bg-white shadow-md rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold">My Orders</h2>
-        {dummyOrders.length > 0 ? (
+        {oproducts.length > 0 ? (
           <div className="mt-4">
-            {dummyOrders.map((order) => (
+            {oproducts.map((order) => (
               <OrderItem key={order.id} order={order} />
             ))}
           </div>
@@ -128,9 +124,9 @@ const Profile = () => {
       <section className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-2xl font-semibold">My Cart</h2>
         <div className="mt-4">
-          {products.length > 0 ? (
+          {cproducts.length > 0 ? (
             <div className="mt-4">
-              {cartItems.map((item) => (
+              {cproducts.map((item) => (
                 <CartItem key={item.id} item={item} />
               ))}
             </div>
