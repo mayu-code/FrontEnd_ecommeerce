@@ -146,14 +146,14 @@ const CategorySelector = () => {
           <div className="mx-2">
             {selectedCategory && (
               <div className="text-right">
-                <span className="font-medium text-white">
+                <span className="text-sm font-medium text-white ">
                   Category: {selectedCategory}
                 </span>
               </div>
             )}
             {selectedSubcategory && (
               <div className="text-right">
-                <span className="font-medium text-white">
+                <span className="text-sm font-medium text-white">
                   Subcategory: {selectedSubcategory}
                 </span>
               </div>

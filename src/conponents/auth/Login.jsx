@@ -38,6 +38,10 @@ const Login = () => {
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
+            // Clear any previous messages
+            setMessage("");
+            setMessageType("");
+
             dispatch(loginUserAction({ data: values }))
               .then((data) => {
                 // Set success message when login is successful
@@ -46,7 +50,7 @@ const Login = () => {
 
                 // Redirect to homepage after successful login
                 setTimeout(() => {
-                  navigate("/");
+                  navigate("/"); // Redirect to the home page
                 }, 2000); // Wait 2 seconds before redirecting
 
                 setSubmitting(false);
