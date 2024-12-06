@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Login from '../conponents/auth/Login'
 import Profile from './User/Profile'
 import UserCart from './User/UserCart'
-import UserOrders from './Admin/UserOrder'
+import UserOrders from './User/UserOrder'
 import UserAccount from './User/UserAccount'
 import AdminProductList from './Admin/AdminProductList'
 import AdminUserList from './Admin/AdminUserList'
@@ -43,7 +43,6 @@ function Home() {
           {auth.user != null ? (
             <>
             <Route path="/user/profile" element={<Profile />} />
-            <Route path="/user/cart" element={<UserCart />} />
             <Route path="/user/orders" element={<UserOrders />} />
             <Route path="/user/updateProfile" element={<UpdateProfile/>}/>
             <Route path="/user/account" element={<UserAccount />} />
