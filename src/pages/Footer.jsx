@@ -12,7 +12,7 @@ const Footer = () => {
                         to="/admin/login" // You can modify the path to match your Admin Login route
                         className=" hover:text-blue-600 text-white py-2 px-4 rounded"
                     >
-                        Admin Login
+                        AdminLogin
                     </Link>
                 </div>
             </div>
