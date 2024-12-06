@@ -6,6 +6,8 @@ import { GetUserProfile } from "../../redux/auth/auth.action";
 import axios from "axios";
 import { API_BASE_URL } from "../../config/api";
 import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   const { auth } = useSelector((store) => store);
@@ -38,29 +40,29 @@ const Profile = () => {
 
 
 
-  useEffect(()=>{
+  useEffect(() => {
     loadcProducts();
     loadOproducts();
-  },[])
+  }, [])
 
   const loadcProducts = async () => {
     const result = await axios.get(`${API_BASE_URL}/user/cartproducts`,
-            {
-                headers:{
-                    "Authorization":`Bearer ${jwt}`
-                }
-            });
-    setcProducts(result.data); 
+      {
+        headers: {
+          "Authorization": `Bearer ${jwt}`
+        }
+      });
+    setcProducts(result.data);
 
   };
   const loadOproducts = async () => {
     const result = await axios.get(`${API_BASE_URL}/user/orderedproducts`,
-            {
-                headers:{
-                    "Authorization":`Bearer ${jwt}`
-                }
-            });
-    setOproducts(result.data); 
+      {
+        headers: {
+          "Authorization": `Bearer ${jwt}`
+        }
+      });
+    setOproducts(result.data);
 
   };
 
@@ -79,7 +81,25 @@ const Profile = () => {
     <div className="max-w-7xl mx-auto px-4 py-6">
       {/* Profile Section */}
       <section className="bg-white shadow-md rounded-lg p-6 mb-8">
-        <h2 className="text-2xl font-semibold">Profile</h2>
+        <div className="flex flex-row justify-between">
+          <h2 className="text-2xl font-semibold">Profile</h2>
+          <div className="flex flex-row gap-2">
+            <div>
+              <button className=" bg-green-500 text-white px-3 py-2 rounded-md">
+                <Link to="/updateProfile" >
+                  <FontAwesomeIcon icon={faPencil} />
+                </Link>
+              </button>
+            </div>
+            <div>
+              <button
+                onClick={handleLogout}
+                className=" bg-red-500 text-white px-3 py-2 rounded-md">
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </button>
+            </div>
+          </div>
+        </div>
         <div className="mt-4 flex flex-row justify-between">
           <div className="flex flex-col gap-2">
             <p><span className="font-semibold">Name:</span> {user1?.name || "N/A"}</p>
@@ -89,20 +109,7 @@ const Profile = () => {
             <p><span className="font-semibold">Login Date:</span> {user1?.loginDate || "N/A"}</p>
             <p><span className="font-semibold">Address:</span> {user1?.address || "N/A"}</p>
           </div>
-          <div className="flex flex-col">
-            <div>
-              <Link to="/updateProfile" className="mt-4 bg-green-500 text-white p-2 rounded">
-                Update
-              </Link>
-            </div>
-            <div>
-              <button
-               onClick={handleLogout}
-               className="mt-4 bg-red-500 text-white p-2 rounded">
-                Logout
-              </button>
-            </div>
-          </div>
+
         </div>
       </section>
 
@@ -111,7 +118,7 @@ const Profile = () => {
         <h2 className="text-2xl font-semibold">My Orders</h2>
         {oproducts.length > 0 ? (
           <div className="mt-4">
-            {oproducts.map((order,index) => (
+            {oproducts.map((order, index) => (
               <OrderItem key={index} order={order} />
             ))}
           </div>
@@ -127,7 +134,7 @@ const Profile = () => {
         <div className="mt-4">
           {cproducts.length > 0 ? (
             <div className="mt-4">
-              {cproducts.map((item,index) => (
+              {cproducts.map((item, index) => (
                 <CartItem key={item.id} item={item} index={index} />
               ))}
             </div>

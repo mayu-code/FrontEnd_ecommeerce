@@ -11,7 +11,6 @@ import UserNav from './normal/UserNav'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetUserProfile } from '../redux/auth/auth.action'
 import Footer from './Footer'
-import AdminLogin from './Admin/AdminLogin'
 import UpdateProfile from '../conponents/auth/UpdateProfile'
 
 function Home() {
@@ -24,18 +23,20 @@ function Home() {
       dispatch(GetUserProfile(jwt))
     }
   }, [jwt])
+
   return (
-    <div className='flex flex-col m-0 p-0'>
+    <div className='flex flex-col min-h-screen'>
       <div>
         {
-          auth.user ?
-            <UserNav />  :  <Nav />}
+          auth.user ? 
+            <UserNav />  :  <Nav />
+        }
       </div>
-      <div>
+      
+      <div className='flex-grow'>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/selectproduct" element={<SelectedProduct />} />
           {auth.user != null ? (
@@ -47,15 +48,12 @@ function Home() {
           ) : (
             <Route path="/user/*" element={<HomePage />} />
           )}
-
         </Routes>
-
       </div>
 
-       <Footer />
-  
+      <Footer /> {/* Always at the bottom */}
     </div>
   );
 }
 
-export default Home
+export default Home;
