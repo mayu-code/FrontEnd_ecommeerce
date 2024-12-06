@@ -7,14 +7,6 @@ const Footer = () => {
                 <div>
                     <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
                 </div>
-                <div>
-                    <Link
-                        to="/admin/login" // You can modify the path to match your Admin Login route
-                        className=" hover:text-blue-600 text-white py-2 px-4 rounded"
-                    >
-                        AdminLogin
-                    </Link>
-                </div>
             </div>
         </footer>
     );
