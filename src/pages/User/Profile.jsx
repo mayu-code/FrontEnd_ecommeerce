@@ -3,11 +3,14 @@ import OrderItem from "./OrderItem";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserProfile } from "../../redux/auth/auth.action";
+import axios from "axios";
+import { API_BASE_URL } from "../../config/api";
 
 const Profile = () => {
   const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
+  const [products, setProducts] = useState([]);
   
   // Loading state to check when the user data is available
   const [loading, setLoading] = useState(true);
@@ -30,6 +33,24 @@ const Profile = () => {
       setUser1(auth.user);
     }
   }, [auth.user]);
+
+
+  // Simulate fetching data (could be replaced with an API call)
+
+  useEffect(()=>{
+    loadProducts();
+  },[])
+
+  const loadProducts = async () => {
+    const result = await axios.get(`${API_BASE_URL}/user/cartproducts`,
+            {
+                headers:{
+                    "Authorization":`Bearer ${jwt}`
+                }
+            });
+    setProducts(result.data); 
+
+  };
 
   const dummyOrders = [
     {
@@ -69,6 +90,9 @@ const Profile = () => {
           <div>
             <p><strong>Name:</strong> {user1?.name || "N/A"}</p>
             <p><strong>Email:</strong> {user1?.email || "N/A"}</p>
+            <p><strong>Mobile No:</strong> {user1?.mobileNo || "N/A"}</p>
+            <p><strong>Registation Date:</strong> {user1?.registationDate || "N/A"}</p>
+            <p><strong>Login Date:</strong> {user1?.loginDate || "N/A"}</p>
             <p><strong>Address:</strong> {user1?.address || "N/A"}</p>
           </div>
           <div className="flex flex-col justify-between">
@@ -104,7 +128,7 @@ const Profile = () => {
       <section className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-2xl font-semibold">My Cart</h2>
         <div className="mt-4">
-          {cartItems.length > 0 ? (
+          {products.length > 0 ? (
             <div className="mt-4">
               {cartItems.map((item) => (
                 <CartItem key={item.id} item={item} />

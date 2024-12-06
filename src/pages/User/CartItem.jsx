@@ -5,7 +5,7 @@ const CartItem = ({ item }) => {
         <div className="border-b py-4 flex flex-row justify-between">
             <div>
                 <h3 className="font-semibold">{item.name}</h3>
-                <p>Quantity: {item.quantity}</p>
+                <p>Quantity: {item.brand}</p>
                 <p>Price: ${item.price}</p>
             </div>
 
