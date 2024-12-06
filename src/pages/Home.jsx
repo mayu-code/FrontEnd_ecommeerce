@@ -11,6 +11,7 @@ import UserNav from './normal/UserNav'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetUserProfile } from '../redux/auth/auth.action'
 import Footer from './Footer'
+
 import UpdateProfile from '../conponents/auth/UpdateProfile'
 
 
@@ -22,15 +23,14 @@ function Home() {
   useEffect(() => {
     if (jwt) {
       dispatch(GetUserProfile(jwt))
-      console.log(auth.data , "ok")
     }
   }, [jwt])
-
   return (
     <div className='flex flex-col m-0 p-0'>
       <div>
         {
-          auth.user ? <UserNav />  :  <Nav />}
+          auth.user ?
+            <UserNav />  :  <Nav />}
       </div>
       <div>
         <Routes>

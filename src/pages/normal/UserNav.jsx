@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import CategorySelector from "../../conponents/product/CategorySelector";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserProfile } from "../../redux/auth/auth.action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const UserNav = () => {
 
@@ -33,15 +35,20 @@ const UserNav = () => {
 
           </div>
         </div>
-        <div>
+        <div className="flex flex-row space-x-2">
 
           {/* Login Button */}
-          <Link
-            to="/user/profile"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-          >
-            Profile
-          </Link>
+          <div>
+            <Link
+              to="/user/profile"
+              className="text-blue-500 border px-3 py-2 rounded-full hover:text-blue-600"
+            >
+              <FontAwesomeIcon icon={faUser} />
+            </Link>
+          </div>
+          <div className="text-center">
+            <p className="font-semibold capitalize text-white">{auth.user.name}</p>
+          </div>
         </div>
       </div>
     </nav>

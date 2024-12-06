@@ -66,13 +66,13 @@ const CartItem = ({ item, index }) => {
       <div className='flex flex-col space-y-2'>
         <button
           onClick={addOrderHandler}
-          className="ml-4 bg-blue-500 text-white p-2 rounded"
+          className="ml-4 bg-green-700 text-white p-2 rounded"
         >
-          Proceed To Buy
+          Buy
         </button>
         <button
           onClick={removeCartHandler}
-          className="ml-4 bg-blue-500 text-white p-2 rounded"
+          className="ml-4 bg-blue-700 text-white p-2 rounded"
         >
           Remove
         </button>
