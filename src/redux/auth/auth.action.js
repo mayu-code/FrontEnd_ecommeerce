@@ -51,7 +51,7 @@ export const GetUserProfile=(jwt)=>async(dispatch)=>{
 export const UpdateUserProfile=(reqData)=>async(dispatch)=>{
     dispatch({type:UPDATE_PROFILE_REQUEST})
     try{
-        const {data} = await Api.post(`${API_BASE_URL}/user/`,reqData)
+        const {data} = await Api.post(`${API_BASE_URL}/user/updateUser`,reqData)
         
         dispatch({type:UPDATE_PROFILE_SUCCESS,payload:data})
     }catch(error){
