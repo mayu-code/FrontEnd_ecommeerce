@@ -81,15 +81,15 @@ const Profile = () => {
       <section className="bg-white shadow-md rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold">Profile</h2>
         <div className="mt-4 flex flex-row justify-between">
-          <div>
-            <p><strong>Name:</strong> {user1?.name || "N/A"}</p>
-            <p><strong>Email:</strong> {user1?.email || "N/A"}</p>
-            <p><strong>Mobile No:</strong> {user1?.mobileNo || "N/A"}</p>
-            <p><strong>Registation Date:</strong> {user1?.registationDate || "N/A"}</p>
-            <p><strong>Login Date:</strong> {user1?.loginDate || "N/A"}</p>
-            <p><strong>Address:</strong> {user1?.address || "N/A"}</p>
+          <div className="flex flex-col gap-2">
+            <p><span className="font-semibold">Name:</span> {user1?.name || "N/A"}</p>
+            <p><span className="font-semibold">Email:</span> {user1?.email || "N/A"}</p>
+            <p><span className="font-semibold">Mobile No:</span> {user1?.mobileNo || "N/A"}</p>
+            <p><span className="font-semibold">Registation Date:</span> {user1?.registationDate || "N/A"}</p>
+            <p><span className="font-semibold">Login Date:</span> {user1?.loginDate || "N/A"}</p>
+            <p><span className="font-semibold">Address:</span> {user1?.address || "N/A"}</p>
           </div>
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col">
             <div>
               <Link to="/updateProfile" className="mt-4 bg-green-500 text-white p-2 rounded">
                 Update
@@ -118,6 +118,7 @@ const Profile = () => {
         ) : (
           <p>No orders found.</p>
         )}
+        <hr />
       </section>
 
       {/* Cart Section */}
@@ -134,6 +135,7 @@ const Profile = () => {
             <p>Your cart is empty.</p>
           )}
         </div>
+        <hr />
       </section>
     </div>
   );

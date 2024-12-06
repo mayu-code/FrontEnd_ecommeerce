@@ -66,7 +66,7 @@ const CategorySelector = () => {
         {/* Category Dropdown */}
         <div ref={categoryRef} className="relative inline-block text-left mr-4">
           <button
-            className="inline-flex justify-center w-40 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+            className="inline-flex justify-center text-white w-40 px-4 py-2 bg-transparent shadow-sm text-sm font-medium "
             onClick={() => setIsCategoryOpen((prev) => !prev)}
           >
             {selectedCategory || "Category"}
@@ -104,7 +104,7 @@ const CategorySelector = () => {
         {selectedCategory && (
           <div ref={subcategoryRef} className="relative inline-block text-left">
             <button
-              className="inline-flex justify-center w-40 px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+              className="inline-flex justify-center w-40 px-4 py-2 text-white shadow-sm text-sm font-medium"
               onClick={() => setIsSubcategoryOpen((prev) => !prev)}
             >
               {selectedSubcategory || "Subcategory"}
@@ -146,14 +146,14 @@ const CategorySelector = () => {
           <div className="mx-2">
             {selectedCategory && (
               <div className="text-right">
-                <span className="font-medium text-gray-700">
+                <span className="font-medium text-white">
                   Category: {selectedCategory}
                 </span>
               </div>
             )}
             {selectedSubcategory && (
               <div className="text-right">
-                <span className="font-medium text-gray-700">
+                <span className="font-medium text-white">
                   Subcategory: {selectedSubcategory}
                 </span>
               </div>
@@ -163,9 +163,9 @@ const CategorySelector = () => {
             {(selectedCategory || selectedSubcategory) && (
               <button
                 onClick={clearSelection}
-                className="mt-2 px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-md hover:bg-red-600"
+                className="mt-2 px-4 py-2 text-red-500 text-sm font-bold rounded-md hover:text-red-600"
               >
-                Clear
+                Clear all
               </button>
             )}
           </div>

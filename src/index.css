@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
-    padding: 0;
+@layer base {
+  html {
+    background-color: whitesmoke;
+  }
+
+  /* Override Tailwind's base margin and padding reset */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
