@@ -126,8 +126,8 @@ const Profile = () => {
         <div className="mt-4">
           {cproducts.length > 0 ? (
             <div className="mt-4">
-              {cproducts.map((item) => (
-                <CartItem key={item.id} item={item} />
+              {cproducts.map((item,index) => (
+                <CartItem key={item.id} item={item} index={index} />
               ))}
             </div>
           ) : (
