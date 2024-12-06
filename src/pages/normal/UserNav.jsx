@@ -15,7 +15,6 @@ const UserNav = () => {
   useEffect(() => {
     if (jwt) {
       dispatch(GetUserProfile(jwt))
-      console.log(auth.user,"not ok")
     }
   }, [jwt])
 
