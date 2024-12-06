@@ -14,16 +14,7 @@ const UserOrders = () => {
         { name: 'Product 5', quantity: 1, price: 25 }
       ]
     },
-    {
-      orderId: 2,
-      date: '2024-11-15',
-      status: 'Delivered',
-      total: 135,
-      products: [
-        { name: 'Product 2', quantity: 1, price: 15 },
-        { name: 'Product 6', quantity: 2, price: 50 }
-      ]
-    },
+    
     {
       orderId: 3,
       date: '2024-11-18',
