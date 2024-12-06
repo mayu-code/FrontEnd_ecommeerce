@@ -111,8 +111,8 @@ const Profile = () => {
         <h2 className="text-2xl font-semibold">My Orders</h2>
         {oproducts.length > 0 ? (
           <div className="mt-4">
-            {oproducts.map((order) => (
-              <OrderItem key={order.id} order={order} />
+            {oproducts.map((order,index) => (
+              <OrderItem key={index} order={order} />
             ))}
           </div>
         ) : (
