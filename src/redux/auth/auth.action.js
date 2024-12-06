@@ -6,7 +6,7 @@ import { Api, API_BASE_URL } from "../../config/api";
  export const loginUserAction=(loginData)=>async(dispatch)=>{
     dispatch({type:LOGIN_REQUEST})
     try{
-        const {data} = await axios.post(`${API_BASE_URL}/auth/admin/login`,loginData.data);
+        const {data} = await axios.post(`${API_BASE_URL}/auth/user/login`,loginData.data);
         if(data){
             localStorage.setItem("jwt",data);
             
