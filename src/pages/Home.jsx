@@ -13,7 +13,6 @@ import { GetUserProfile } from '../redux/auth/auth.action'
 import Footer from './Footer'
 import AdminLogin from './Admin/AdminLogin'
 import UpdateProfile from '../conponents/auth/UpdateProfile'
-import UserOrders from './Admin/UserOrder'
 
 function Home() {
   const { auth } = useSelector(store => store)
