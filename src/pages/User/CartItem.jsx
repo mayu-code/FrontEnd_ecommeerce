@@ -3,7 +3,7 @@ import React from 'react';
 import { API_BASE_URL } from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, index }) => {
 
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
@@ -51,10 +51,16 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="border-b py-4 flex flex-row justify-between">
-      <div>
-        <h3 className="font-semibold">{item.name}</h3>
-        <p>Brand: {item.brand}</p> {/* Display brand instead of quantity if it's a brand */}
-        <p>Price: ${item.price}</p>
+      <div className='flex flex-row'>
+        <div>
+          <h4>{index + 1}.</h4>
+        </div>
+        <div>
+          <h4 className="font-semibold capitalize">{item.name}</h4>
+          <p className='capitalize'><span className='font-semibold'>Brand</span>: {item.brand}</p> {/* Display brand instead of quantity if it's a brand */}
+          <p className='capitalize'>{item.features}</p> {/* Display brand instead of quantity if it's a brand */}
+          <p className='capitalize'><span className='font-semibold'>Price</span>: Rs.{item.price}</p>
+        </div>
       </div>
 
       <div className='flex flex-col space-y-2'>
