@@ -10,10 +10,6 @@ const ProductCard = ({ product }) => {
 
   const addCartHandler = async () => {
 
-    if(jwt==null){
-      navigate("/login");
-    }
-
     try {
       const response = await axios.post(
         `${API_BASE_URL}/user/addCart/${product.id}`, 
@@ -27,13 +23,12 @@ const ProductCard = ({ product }) => {
       navigate('/user/profile');
     } catch (error) {
       alert("You need to login first !");
+      navigate("/login");
     }
   };
 
   const addOrderHandler = async () => {
-    if(jwt==null){
-      navigate("/login");
-    }
+  
     try {
       const response = await axios.post(
         `${API_BASE_URL}/user/ordered/${product.id}`, 
@@ -48,6 +43,7 @@ const ProductCard = ({ product }) => {
     } catch (error) {
       
       alert("You need to login First !");
+      navigate("/login");
     }
   };
 
