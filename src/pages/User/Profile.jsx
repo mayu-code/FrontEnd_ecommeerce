@@ -66,7 +66,12 @@ const Profile = () => {
 
   };
 
+  const UpdateUser =()=>{
+      navigate("/updateProfile")
+  }
+
   const handleLogout = () => {
+    alert("Are you want to logout from the website !")
     localStorage.removeItem('jwt');
     navigate('/');
     window.location.reload();
@@ -85,10 +90,11 @@ const Profile = () => {
           <h2 className="text-2xl font-semibold">Profile</h2>
           <div className="flex flex-row gap-2">
             <div>
-              <button className=" bg-green-500 text-white px-3 py-2 rounded-md">
-                <Link to="/updateProfile" >
+              <button
+              onClick={UpdateUser}
+               className=" bg-green-500 text-white px-3 py-2 rounded-md">
                   <FontAwesomeIcon icon={faPencil} />
-                </Link>
+
               </button>
             </div>
             <div>

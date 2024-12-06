@@ -9,6 +9,11 @@ const ProductCard = ({ product }) => {
   const jwt = localStorage.getItem("jwt");
 
   const addCartHandler = async () => {
+
+    if(jwt==null){
+      navigate("/login");
+    }
+
     try {
       const response = await axios.post(
         `${API_BASE_URL}/user/addCart/${product.id}`, 
@@ -21,12 +26,14 @@ const ProductCard = ({ product }) => {
       );
       navigate('/user/profile');
     } catch (error) {
-      console.error("Error adding to cart:", error.response?.data || error.message);
-      alert("Failed to add product to the cart. Please try again.");
+      alert("You need to login first !");
     }
   };
 
   const addOrderHandler = async () => {
+    if(jwt==null){
+      navigate("/login");
+    }
     try {
       const response = await axios.post(
         `${API_BASE_URL}/user/ordered/${product.id}`, 
@@ -39,8 +46,8 @@ const ProductCard = ({ product }) => {
       );
       navigate('/user/profile');
     } catch (error) {
-      console.error("Error adding to cart:", error.response?.data || error.message);
-      alert("Failed to add product to the cart. Please try again.");
+      
+      alert("You need to login First !");
     }
   };
 
