@@ -59,20 +59,20 @@ const CartItem = ({ item, index }) => {
           <h4 className="font-semibold capitalize">{item.name}</h4>
           <p className='capitalize'><span className='font-semibold'>Brand</span>: {item.brand}</p> {/* Display brand instead of quantity if it's a brand */}
           <p className='capitalize'>{item.features}</p> {/* Display brand instead of quantity if it's a brand */}
-          <p className='capitalize'><span className='font-semibold'>Price</span>: Rs.{item.price}</p>
+          <p className='capitalize font-semibold'>Price: <span className='text-green-700'>$ {item.price}</span> </p>
         </div>
       </div>
 
-      <div className='flex flex-col space-y-2'>
+      <div className='flex flex-row justify-center items-center'>
         <button
           onClick={addOrderHandler}
-          className="ml-4 bg-green-700 text-white p-2 rounded"
+          className="ml-4 h-1/2 bg-green-700 text-white px-2 rounded hover:bg-green-800"
         >
-          Buy
+          Buy Now
         </button>
         <button
           onClick={removeCartHandler}
-          className="ml-4 bg-blue-700 text-white p-2 rounded"
+          className="ml-4 h-1/2 bg-red-700 text-white px-2 rounded hover:bg-red-800"
         >
           Remove
         </button>
