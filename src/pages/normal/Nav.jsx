@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import CategorySelector from "../../conponents/product/CategorySelector";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserProfile } from "../../redux/auth/auth.action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
 
-  
-  const {auth} = useSelector(store=>store)
+
+  const { auth } = useSelector(store => store)
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
 
@@ -19,24 +21,37 @@ const Nav = () => {
   }, [jwt])
 
   return (
-    <nav className="shadow-md">
+    <nav className="bg-blue-950 shadow-md">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-blue-500">
-          E-Shop
-        </Link>
-            <CategorySelector/>
-            
-        {/* Login Button */}
-        <Link
-          to="/login"
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-        >
-          Login
-        </Link>
+        <div>
+          <div className="flex flex-row gap-6">
+
+            {/* Logo */}
+            <Link to="/" className="text-xl font-bold text-blue-500">
+              E-Shop
+            </Link>
+
+            <CategorySelector />
+
+          </div>
+        </div>
+        <div className="flex flex-row space-x-2">
+
+          {/* Login Button */}
+          <div>
+            <Link
+              to="/login"
+              className="text-blue-500 px-4 py-2 text-lg bg-transparent border rounded-lg hover:text-blue-600"
+            >
+              Login
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );
 };
 
 export default Nav;
+
+
