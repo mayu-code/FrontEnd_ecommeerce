@@ -27,6 +27,7 @@ const ProductCard = ({ product }) => {
       navigate('/user/profile');
     } catch (error) {
       alert("You need to login first !");
+      navigate("/login");
     }
   };
 
@@ -48,6 +49,7 @@ const ProductCard = ({ product }) => {
     } catch (error) {
 
       alert("You need to login First !");
+      navigate("/login");
     }
   };
 
