@@ -7,17 +7,17 @@ import axios from "axios";
 const HomePage = () => {
   // Sample product data
   const [products, setProducts] = useState([]);
-  const [loader,setLoading]  = useState(true);
+  const [loader, setLoading] = useState(true);
 
   // Simulate fetching data (could be replaced with an API call)
 
-  useEffect(()=>{
+  useEffect(() => {
     loadProducts();
-  },[])
+  }, [])
 
   const loadProducts = async () => {
     const result = await axios.get(`${API_BASE_URL}/home/allProduct`);
-    setProducts(result.data); 
+    setProducts(result.data);
     setLoading(false);
   };
 
@@ -27,7 +27,7 @@ const HomePage = () => {
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      
+
       </div>
     </div>
   );

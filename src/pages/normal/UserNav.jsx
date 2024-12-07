@@ -24,7 +24,7 @@ const UserNav = () => {
     <nav className="bg-blue-950 shadow-md">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div>
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-row gap-6">
 
             {/* Logo */}
             <Link to="/" className="text-xl font-bold text-blue-500">

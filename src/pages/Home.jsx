@@ -13,6 +13,7 @@ import { GetUserProfile } from '../redux/auth/auth.action'
 import Footer from './Footer'
 
 import UpdateProfile from '../conponents/auth/UpdateProfile'
+import ProductDetail from './Product/ProductDetail'
 
 
 function Home() {
@@ -30,7 +31,7 @@ function Home() {
       <div>
         {
           auth.user ?
-            <UserNav />  :  <Nav />}
+            <UserNav /> : <Nav />}
       </div>
       <div>
         <Routes>
@@ -38,6 +39,7 @@ function Home() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/selectproduct" element={<SelectedProduct />} />
+          <Route path="/productDetails" element={<ProductDetail />} />
           {auth.user != null ? (
             <>
               <Route path="/user/profile" element={<Profile />} />
@@ -52,8 +54,8 @@ function Home() {
 
       </div>
 
-       <Footer />
-  
+      <Footer />
+
     </div>
   );
 }
