@@ -8,7 +8,8 @@ import { Api, API_BASE_URL } from "../../config/api";
     try{
         const {data} = await axios.post(`${API_BASE_URL}/auth/user/login`,loginData.data);
         if(data){
-            localStorage.setItem("jwt",data);
+            localStorage.setItem("jwt",data.token);
+            console.log(data);
             
         }
         dispatch({type:LOGIN_SUCCESS,payload:data.token})
