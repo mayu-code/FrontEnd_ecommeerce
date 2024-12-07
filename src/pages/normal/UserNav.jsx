@@ -35,20 +35,21 @@ const UserNav = () => {
 
           </div>
         </div>
-        <div className="flex flex-row space-x-2">
-
+        <div className="justify-center">
           {/* Login Button */}
-          <div>
-            <Link
-              to="/user/profile"
-              className="text-blue-500 border px-3 py-2 rounded-full hover:text-blue-600"
-            >
-              <FontAwesomeIcon icon={faUser} />
-            </Link>
-          </div>
-          <div className="text-center">
-            <p className="font-semibold capitalize text-white">{auth.user.name.trim().split(' ')[0]}</p>
-          </div>
+          <Link
+            to="/user/profile"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            <div className="flex flex-row gap-2 justify-between">
+              <div className="border rounded-full px-3 py-2">
+                <FontAwesomeIcon icon={faUser} />
+              </div>
+              <div className="flex justify-center items-center">
+                <p className="font-semibold capitalize text-blue-100">{auth.user.name.trim().split(' ')[0]}</p>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </nav>

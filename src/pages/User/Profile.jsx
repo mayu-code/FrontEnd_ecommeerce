@@ -8,12 +8,14 @@ import { API_BASE_URL } from "../../config/api";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import AddressSection from "./AddressItem";
 
 const Profile = () => {
   const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
   const [cproducts, setcProducts] = useState([]);
+  const [addresses, setAddresses] = useState([]);
   const [oproducts, setOproducts] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -34,9 +36,9 @@ const Profile = () => {
   useEffect(() => {
     if (auth.user) {
       setUser1(auth.user);
+      setAddresses(auth.user.addresses || []); // Load addresses from the user object
     }
   }, [auth.user]);
-
 
 
 
@@ -66,8 +68,8 @@ const Profile = () => {
 
   };
 
-  const UpdateUser =()=>{
-      navigate("/updateProfile")
+  const UpdateUser = () => {
+    navigate("/updateProfile")
   }
 
   const handleLogout = () => {
@@ -91,9 +93,9 @@ const Profile = () => {
           <div className="flex flex-row gap-2">
             <div>
               <button
-              onClick={UpdateUser}
-               className=" bg-green-500 text-white px-3 py-2 rounded-md">
-                  <FontAwesomeIcon icon={faPencil} />
+                onClick={UpdateUser}
+                className=" bg-green-500 text-white px-3 py-2 rounded-md">
+                <FontAwesomeIcon icon={faPencil} />
 
               </button>
             </div>
@@ -117,6 +119,23 @@ const Profile = () => {
           </div>
 
         </div>
+      </section>
+
+
+      {/* Address Section */}
+      <section className="bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 className="text-2xl font-semibold">Address</h2>
+        {addresses.length > 0 ? (
+
+          <div className="mt-4">
+            {addresses.map((address, index) => (
+              <AddressSection key={address.id} index={index} address={address} />
+            ))}
+
+          </div>
+        ) : (
+          <p>No address found.</p>
+        )}
       </section>
 
       {/* My Orders Section */}
