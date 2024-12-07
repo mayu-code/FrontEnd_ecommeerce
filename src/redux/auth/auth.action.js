@@ -9,7 +9,6 @@ import { Api, API_BASE_URL } from "../../config/api";
         const {data} = await axios.post(`${API_BASE_URL}/auth/user/login`,loginData.data);
         if(data){
             localStorage.setItem("jwt",data.token);
-            console.log(data);
             
         }
         dispatch({type:LOGIN_SUCCESS,payload:data.token})
@@ -25,7 +24,7 @@ export const registerUserAction=(registerData)=>async(dispatch)=>{
     try{
         const {data} = await axios.post(`${API_BASE_URL}/auth/user/register`,registerData.data);
         if(data){
-            localStorage.setItem("jwt",data);
+            localStorage.setItem("jwt",data.token);
             
         }
         dispatch({type:LOGIN_SUCCESS,payload:data.token})
