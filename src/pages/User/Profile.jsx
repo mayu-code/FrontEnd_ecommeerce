@@ -69,7 +69,7 @@ const Profile = () => {
   };
 
   const UpdateUser = () => {
-    navigate("/updateProfile")
+    navigate("/user/updateProfile")
   }
 
   const handleLogout = () => {

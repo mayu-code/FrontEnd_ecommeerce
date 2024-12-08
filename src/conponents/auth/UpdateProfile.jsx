@@ -1,34 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik } from "formik";
-import { useDispatch, useSelector } from "react-redux"; 
-import { Link, useNavigate } from "react-router-dom";
-import { UpdateUserProfile } from "../../redux/auth/auth.action";
+import { useDispatch, useSelector } from "react-redux";
+import { GetUserProfile, UpdateUserProfile } from "../../redux/auth/auth.action";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Fetch user data from the store (Assuming user data is stored in redux)
-  const user = useSelector((state) => state.auth.user);
+  // Redux states
+  const auth = useSelector((state) => state.auth);
 
-  // If user data is not yet available, you can show a loading state
-  if (!user) {
+  // Local states for two-way binding
+  const [user1, setUser1] = useState({});
+  const [addresses, setAddresses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const jwt = localStorage.getItem("jwt");
+
+  // Fetch user profile data
+  useEffect(() => {
+    if (jwt) {
+      dispatch(GetUserProfile(jwt)).finally(() => {
+        setLoading(false);
+      });
+    } else {
+      setLoading(false);
+    }
+  }, [jwt, dispatch]);
+
+  // Sync profile data from Redux store to local state
+  useEffect(() => {
+    if (auth.user) {
+      setUser1(auth.user.data); // Main user data
+    }
+  }, [auth.user]);
+
+  // Handle address updates
+  const handleAddressChange = (index, field, value) => {
+    const updatedAddresses = [...addresses];
+    updatedAddresses[index][field] = value;
+    setAddresses(updatedAddresses);
+  };
+
+  if (loading) {
     return <div>Loading...</div>;
   }
-
-  // Initialize form values with user data, if available
-  const initialValues = {
-    name: user?.name || "",
-    email: user?.email || "",
-    mobileNo: user?.mobileNo || "",
-    password: "", // Password field remains empty for updates (or can be updated if needed)
-    address: {
-      country: user?.address?.country || "",
-      state: user?.address?.state || "",
-      city: user?.address?.city || "",
-      pinCode: user?.address?.pinCode || "", // Ensure pinCode is handled as a string or number
-    },
-  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -37,8 +54,12 @@ const UpdateProfile = () => {
           Update Profile
         </h1>
         <Formik
-          initialValues={initialValues}
-          enableReinitialize={true} // Enable reinitialization when user data changes
+          initialValues={{
+            name: user1.name || "",
+            email: user1.email || "",
+            mobileNo: user1.mobileNo || "",
+          }}
+          enableReinitialize // Ensures form reinitializes when `user1` changes
           validate={(values) => {
             const errors = {};
             if (!values.name) {
@@ -56,28 +77,12 @@ const UpdateProfile = () => {
             } else if (!/^\d{10}$/.test(values.mobileNo)) {
               errors.mobileNo = "Invalid mobile number (must be 10 digits)";
             }
-
-            // Address validation
-            if (!values.address?.country) {
-              errors.address = { ...errors.address, country: "Country is required" };
-            }
-            if (!values.address?.state) {
-              errors.address = { ...errors.address, state: "State is required" };
-            }
-            if (!values.address?.city) {
-              errors.address = { ...errors.address, city: "City is required" };
-            }
-            if (!values.address?.pinCode) {
-              errors.address = { ...errors.address, pinCode: "Pin code is required" };
-            } else if (!/^\d{6}$/.test(values.address?.pinCode)) {
-              errors.address = { ...errors.address, pinCode: "Invalid pin code (must be 6 digits)" };
-            }
-
             return errors;
           }}
           onSubmit={(values, { setSubmitting }) => {
-            dispatch(UpdateUserProfile({ data: values })).then(() => {
-              navigate("/profile"); // Redirect to the profile page after update
+            const payload = { ...user1, ...values, addresses };
+            dispatch(UpdateUserProfile({ data: payload })).then(() => {
+              navigate("/profile");
               setSubmitting(false);
             });
           }}
@@ -103,41 +108,88 @@ const UpdateProfile = () => {
                 <input
                   type="text"
                   name="name"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    handleChange(e);
+                    setUser1({ ...user1, name: e.target.value });
+                  }}
                   onBlur={handleBlur}
                   value={values.name}
                   className={`mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                    errors.name && touched.name ? "border-red-500" : "border-gray-300"
+                    errors.name && touched.name
+                      ? "border-red-500"
+                      : "border-gray-300"
                   }`}
                   placeholder="Enter your full name"
                 />
                 {errors.name && touched.name && (
-                  <span className="text-sm text-red-500 mt-1">{errors.name}</span>
+                  <span className="text-sm text-red-500 mt-1">
+                    {errors.name}
+                  </span>
                 )}
               </div>
 
-              {/* Other fields... */}
-
-              {/* Address Fields */}
+              {/* Email Input */}
               <div className="flex flex-col">
-                <label htmlFor="address.country" className="text-sm font-medium text-gray-700">
-                  Country
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={(e) => {
+                    handleChange(e);
+                    setUser1({ ...user1, email: e.target.value });
+                  }}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  className={`mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                    errors.email && touched.email
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                  placeholder="Enter your email"
+                />
+                {errors.email && touched.email && (
+                  <span className="text-sm text-red-500 mt-1">
+                    {errors.email}
+                  </span>
+                )}
+              </div>
+
+              {/* Mobile Number Input */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="mobileNo"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Mobile Number
                 </label>
                 <input
                   type="text"
-                  name="address.country"
-                  onChange={handleChange}
+                  name="mobileNo"
+                  onChange={(e) => {
+                    handleChange(e);
+                    setUser1({ ...user1, mobileNo: e.target.value });
+                  }}
                   onBlur={handleBlur}
-                  value={values.address.country}
+                  value={values.mobileNo}
                   className={`mt-2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-                    errors.address?.country && touched.address?.country ? "border-red-500" : "border-gray-300"
+                    errors.mobileNo && touched.mobileNo
+                      ? "border-red-500"
+                      : "border-gray-300"
                   }`}
-                  placeholder="Enter your country"
+                  placeholder="Enter your mobile number"
                 />
-                {errors.address?.country && touched.address?.country && (
-                  <span className="text-sm text-red-500 mt-1">{errors.address.country}</span>
+                {errors.mobileNo && touched.mobileNo && (
+                  <span className="text-sm text-red-500 mt-1">
+                    {errors.mobileNo}
+                  </span>
                 )}
               </div>
+
 
               {/* Submit Button */}
               <button
@@ -147,16 +199,6 @@ const UpdateProfile = () => {
               >
                 Update
               </button>
-
-              {/* Extra Links */}
-              <div className="text-center">
-                <p className="text-sm text-gray-600">
-                  Want to go back to profile?{" "}
-                  <Link to="/profile" className="text-blue-500 hover:underline">
-                    Back to Profile
-                  </Link>
-                </p>
-              </div>
             </form>
           )}
         </Formik>
