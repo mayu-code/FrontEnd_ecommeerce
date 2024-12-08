@@ -10,22 +10,25 @@ const ProductCard = ({ product }) => {
 
   const addCartHandler = async () => {
 
-    if (jwt == null) {
-      navigate("/login");
-    }
+    if (jwt != null) {
 
-    try {
-      const response = await axios.post(
-        `${API_BASE_URL}/user/addCart/${product.id}`,
-        {},  // You can pass an empty object if no body data is required
-        {
-          headers: {
-            "Authorization": `Bearer ${jwt}`, // JWT token for authentication
-          },
-        }
-      );
-      navigate('/user/profile');
-    } catch (error) {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/user/addCart/${product.id}`,
+          {},  // You can pass an empty object if no body data is required
+          {
+            headers: {
+              "Authorization": `Bearer ${jwt}`, // JWT token for authentication
+            },
+          }
+        );
+        navigate('/user/profile');
+      } catch (error) {
+        alert("You need to login first !");
+        navigate("/login");
+      }
+    }
+    else {
       alert("You need to login first !");
       navigate("/login");
     }

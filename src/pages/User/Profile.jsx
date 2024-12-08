@@ -35,8 +35,8 @@ const Profile = () => {
   // Sync profile data from Redux store to local state
   useEffect(() => {
     if (auth.user) {
-      setUser1(auth.user);
-      setAddresses(auth.user.addresses || []); // Load addresses from the user object
+      setUser1(auth.user.data);
+      setAddresses(auth.user.data.addresses || []);
     }
   }, [auth.user]);
 
@@ -54,7 +54,7 @@ const Profile = () => {
           "Authorization": `Bearer ${jwt}`
         }
       });
-    setcProducts(result.data);
+    setcProducts(result.data.data);
 
   };
   const loadOproducts = async () => {
@@ -64,7 +64,7 @@ const Profile = () => {
           "Authorization": `Bearer ${jwt}`
         }
       });
-    setOproducts(result.data);
+    setOproducts(result.data.data);
 
   };
 
@@ -81,7 +81,7 @@ const Profile = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>; // You can show a loading spinner or message here
+    return <div>Loading...</div>; 
   }
 
   return (

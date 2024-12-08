@@ -35,6 +35,7 @@ export const registerUserAction=(registerData)=>async(dispatch)=>{
 
 export const GetUserProfile=(jwt)=>async(dispatch)=>{
     dispatch({type:GET_PROFILE_REQUEST})
+
     try{
         const {data} = await axios.get(
             `${API_BASE_URL}/user/getUser`,

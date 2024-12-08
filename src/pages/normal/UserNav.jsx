@@ -46,7 +46,7 @@ const UserNav = () => {
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <div className="flex justify-center items-center">
-                <p className="font-semibold capitalize text-blue-100">{auth.user.name.trim().split(' ')[0]}</p>
+                <p className="font-semibold capitalize text-blue-100">{auth.user.data.name.trim().split(' ')[0]}</p>
               </div>
             </div>
           </Link>

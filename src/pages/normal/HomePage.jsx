@@ -17,7 +17,7 @@ const HomePage = () => {
 
   const loadProducts = async () => {
     const result = await axios.get(`${API_BASE_URL}/home/allProduct`);
-    setProducts(result.data);
+    setProducts(result.data.data);
     setLoading(false);
   };
 
