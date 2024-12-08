@@ -81,11 +81,11 @@ const Profile = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-10">
       {/* Profile Section */}
       <section className="bg-white shadow-md rounded-lg p-6 mb-8">
         <div className="flex flex-row justify-between">
@@ -115,7 +115,6 @@ const Profile = () => {
             <p><span className="font-semibold">Mobile No:</span> {user1?.mobileNo || "N/A"}</p>
             <p><span className="font-semibold">Registation Date:</span> {user1?.registationDate || "N/A"}</p>
             <p><span className="font-semibold">Login Date:</span> {user1?.loginDate || "N/A"}</p>
-            <p><span className="font-semibold">Address:</span> {user1?.address || "N/A"}</p>
           </div>
 
         </div>

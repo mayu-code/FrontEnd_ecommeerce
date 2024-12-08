@@ -33,7 +33,7 @@ function Home() {
           auth.user ?
             <UserNav /> : <Nav />}
       </div>
-      <div>
+      <div className='pt-10'>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
