@@ -39,7 +39,7 @@ function Home() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/selectproduct" element={<SelectedProduct />} />
-          <Route path="/productDetails" element={<ProductDetail />} />
+          <Route path="/productDetails/:id" element={<ProductDetail />} />
           {auth.user != null ? (
             <>
               <Route path="/user/profile" element={<Profile />} />

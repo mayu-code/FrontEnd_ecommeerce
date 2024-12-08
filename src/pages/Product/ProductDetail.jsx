@@ -1,14 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { API_BASE_URL } from "../../config/api";
+import axios from "axios";
 
 const ProductDetail = () => {
-  // Dummy product data
-  const product = {
-    id: "1",
-    name: "Premium Wireless Headphones",
-    description:
-      "Experience exceptional sound quality with these wireless headphones. Perfect for music lovers.",
-    price: "99.99",
-    imageUrl: "https://via.placeholder.com/300", // Replace with a real image URL
+
+  const {id} = useParams();
+  const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt");
+  const [product,setProduct] = useState([]);
+
+  useEffect(() => {
+    loadProducts();
+  }, [])
+
+  const loadProducts = async () => {
+    const result = await axios.get(`${API_BASE_URL}/home/Product/${id}`);
+    setProduct(result.data.data);
+  };
+
+  const addCartHandler = async () => {
+    if (jwt != null) {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/user/addCart/${product.id}`,{}, 
+          {
+            headers: {
+              "Authorization": `Bearer ${jwt}`, 
+            },
+          }
+        );
+        navigate('/user/profile');
+      } catch (error) {
+        alert("You need to login first !");
+        navigate("/login");
+      }
+    }
+    else {
+      alert("You need to login first !");
+      navigate("/login");
+    }
+  };
+
+  const addOrderHandler = async () => {
+    if (jwt == null) {
+      navigate("/login");
+    }
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/user/ordered/${product.id}`,{}, 
+        {
+          headers: {
+            "Authorization": `Bearer ${jwt}`, // JWT token for authentication
+          },
+        }
+      );
+      navigate('/user/profile');
+    } catch (error) {
+      alert("You need to login First !");
+      navigate("/login");
+    }
   };
 
   return (
@@ -17,7 +68,7 @@ const ProductDetail = () => {
         {/* Product Image */}
         <div>
           <img
-            src={product.imageUrl}
+            src={product.imgUrl}
             alt={product.name}
             className="w-full rounded-lg shadow-md"
           />
@@ -27,7 +78,7 @@ const ProductDetail = () => {
           <h4 className="text-2xl text-gray-800">Category</h4>
           <h3 className="text-xl text-gray-800">SubCategory</h3>
           <h1 className="text-3xl font-bold text-gray-800">{product.name}</h1>
-          <p className="mt-4 text-gray-600">{product.description}</p>
+          <p className="mt-4 text-gray-600">{product.features}</p>
           <div className="mt-4">
             <span className="text-xl font-semibold text-green-600">
               ${product.price}
@@ -35,10 +86,14 @@ const ProductDetail = () => {
           </div>
           {/* Add to Cart & Buy Now */}
           <div className="mt-6 flex space-x-4">
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700">
+            <button 
+            onClick={addCartHandler}
+            className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700">
               Add to Cart
             </button>
-            <button className="bg-green-600 text-white px-6 py-2 rounded-md shadow hover:bg-green-700">
+            <button 
+             onClick={addOrderHandler}
+            className="bg-green-600 text-white px-6 py-2 rounded-md shadow hover:bg-green-700">
               Buy Now
             </button>
           </div>

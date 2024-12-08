@@ -18,7 +18,7 @@ function SelectedProduct() {
   
     const loadProducts = async () => {
       const result = await axios.get(`${API_BASE_URL}/home/getProductByCategoryOrSubCategory/${category}/${subcategory}`);
-      setProducts(result.data); 
+      setProducts(result.data.data); 
       setLoading(false);
     };
   
