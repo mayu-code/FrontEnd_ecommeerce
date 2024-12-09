@@ -11,7 +11,6 @@ const UpdateProfile = () => {
   // Redux states
   const auth = useSelector((state) => state.auth);
 
-  // Local states for two-way binding
   const [user1, setUser1] = useState({});
   const [addresses, setAddresses] = useState([]);
   const [loading, setLoading] = useState(true);

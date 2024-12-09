@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
       <div className="mt-4">
         <h3 className="text-lg font-semibold">{product.name}</h3>
         <p className="text-gray-600 text-sm">{product.features}</p>
-        <p className="mt-2 text-xl font-bold text-blue-500">${product.price}</p>
+        <p className="mt-2 text-xl font-bold text-blue-500">₹{product.price}</p>
   
       </div>
     </div>

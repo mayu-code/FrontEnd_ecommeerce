@@ -11,7 +11,7 @@ const CartItem = ({ item, index }) => {
   const addOrderHandler = async () => {
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/user/ordered/${item.id}`,
+        `${API_BASE_URL}/user/ordered/${item.id}`,{},
         {
           headers: {
             "Authorization": `Bearer ${jwt}`,
@@ -56,7 +56,7 @@ const CartItem = ({ item, index }) => {
           <h4 className="font-semibold capitalize">{item.name}</h4>
           <p className='capitalize'><span className='font-semibold'>Brand</span>: {item.brand}</p> {/* Display brand instead of quantity if it's a brand */}
           <p className='capitalize'>{item.features}</p> {/* Display brand instead of quantity if it's a brand */}
-          <p className='capitalize font-semibold'>Price: <span className='text-green-700'>$ {item.price}</span> </p>
+          <p className='capitalize font-semibold'>Price: <span className='text-green-700'>₹ {item.price}</span> </p>
         </div>
       </div>
 

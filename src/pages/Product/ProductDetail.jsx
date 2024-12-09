@@ -76,13 +76,13 @@ const ProductDetail = () => {
         </div>
         {/* Product Details */}
         <div>
-          <h4 className="text-2xl text-gray-800">Category</h4>
-          <h3 className="text-xl text-gray-800">SubCategory</h3>
+          <h4 className="text-2xl text-gray-800">{product.category}</h4>
+          <h3 className="text-xl text-gray-800">{product.subcategory}</h3>
           <h1 className="text-3xl font-bold text-gray-800">{product.name}</h1>
           <p className="mt-4 text-gray-600">{product.features}</p>
           <div className="mt-4">
             <span className="text-xl font-semibold text-green-600">
-              ${product.price}
+              ₹{product.price}
             </span>
           </div>
           {/* Add to Cart & Buy Now */}

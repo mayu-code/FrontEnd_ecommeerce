@@ -10,8 +10,8 @@ const CategorySelector = () => {
 
   // Sample categories and subcategories data
   const categories = {
-    Electronics: ["Headphones", "Laptops", "Cameras"],
-    Fashion: ["Men's Clothing", "Women's Clothing", "Accessories"],
+    Electronics: ["Headphones", "Laptops", "Cameras","Mobile"],
+    Fashion: ["Shirt", "Cargo", "Shoes"],
     Home: ["Furniture", "Kitchen", "Decor"],
   };
 
