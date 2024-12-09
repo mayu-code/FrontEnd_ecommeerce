@@ -23,10 +23,6 @@ export const registerUserAction=(registerData)=>async(dispatch)=>{
     dispatch({type:LOGIN_REQUEST})
     try{
         const {data} = await axios.post(`${API_BASE_URL}/auth/user/register`,registerData.data);
-        if(data){
-            localStorage.setItem("jwt",data.token);
-            
-        }
         dispatch({type:LOGIN_SUCCESS,payload:data.token})
     }catch(error){
         dispatch({type:LOGIN_FAILURE,payload:error})
