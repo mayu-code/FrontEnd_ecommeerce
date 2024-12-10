@@ -33,17 +33,18 @@ const OrderItem = ({ order }) => {
 
           <p>{order.orderId}</p>
 
-
-          <p className='capitalize'>{order.orderStatus}</p>
-          <p className='capitalize'>{order.orderDate}</p>
-          <p className='capitalize'>{order.paymentMethod}</p>
-          <p className='capitalize'>{order.shippingAddress}</p>
-          <p className='capitalize'>{order.totalPaid}</p>
-          <p className='capitalize'>{order.transitionId}</p>
+          <p>{order.id}.</p>
         </div>
+        <div>
 
+          <h4 className='capitalize font-semibold'>{order.name}</h4>
+          <p className='capitalize'>{order.brand}</p>
+          <p className='capitalize'>{order.features}</p>
+        </div>
       </div>
+
     </div>
+    </div >
   );
 };
 

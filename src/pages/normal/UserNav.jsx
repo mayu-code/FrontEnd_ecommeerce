@@ -10,7 +10,8 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 const UserNav = () => {
 
 
-  const { auth } = useSelector(store => store)
+  const auth = useSelector((store) => store.auth);
+
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
 
@@ -19,6 +20,9 @@ const UserNav = () => {
       dispatch(GetUserProfile(jwt))
     }
   }, [jwt])
+
+  const userName = auth.user?.data?.name;
+  const displayName = userName ? userName.trim().split(' ')[0] : "Guest";
 
   return (
     <nav className="bg-blue-950 shadow-md fixed top-0 w-full z-10">
@@ -46,7 +50,7 @@ const UserNav = () => {
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <div className="flex justify-center items-center">
-                <p className="font-semibold capitalize text-blue-100">{auth.user.data.name.trim().split(' ')[0]}</p>
+                <p className="font-semibold capitalize text-blue-100">{displayName}</p>
               </div>
             </div>
           </Link>

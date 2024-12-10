@@ -11,7 +11,7 @@ import { faPencil, faRightFromBracket } from "@fortawesome/free-solid-svg-icons"
 import AddressSection from "./AddressItem";
 
 const Profile = () => {
-  const { auth } = useSelector((store) => store);
+  const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
