@@ -50,17 +50,17 @@ const CartItem = ({ item, id }) => {
   return (
     <div className="border-b py-4 flex flex-row justify-between">
       <Link to={`/productDetails/${item.product.id}`}>
-      <div className='flex flex-row gap-4'>
-        <div>
-          <img src={item.product.imgUrl} alt="image" className='w-52' />
+        <div className='flex flex-row gap-4'>
+          <div>
+            <img src={item.product.imgUrl} alt="image" className='w-20' />
+          </div>
+          <div>
+            <p className='capitalize'><span className='font-semibold'>Brand</span>: {item.product.brand}</p> {/* Display brand instead of quantity if it's a brand */}
+            <p className='capitalize font-semibold'>Price: <span className='text-green-700'>₹ {item.product.price}</span> </p>
+            <p className='capitalize font-semibold'>quantity: <span className='text-black font-semibold'>{item.quantity}</span> </p>
+            <p className='capitalize font-semibold'>Total Price: <span className='text-green-700'>₹ {item.price}</span> </p>
+          </div>
         </div>
-        <div>
-          <p className='capitalize'><span className='font-semibold'>Brand</span>: {item.product.brand}</p> {/* Display brand instead of quantity if it's a brand */}
-          <p className='capitalize font-semibold'>Price: <span className='text-green-700'>₹ {item.product.price}</span> </p>
-          <p className='capitalize font-semibold'>quantity: <span className='text-green-700'>{item.quantity}</span> </p>
-          <p className='capitalize font-semibold'>Total Price: <span className='text-green-700'>₹ {item.price}</span> </p>
-        </div>
-      </div>
       </Link>
       <div className='flex flex-row justify-center items-center'>
         <button

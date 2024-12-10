@@ -85,7 +85,7 @@ const ProceedToPay = () => {
           )}
         </div>
         <div className="flex justify-end mt-5">
-          <p className="text-xl">Amount to pay : <span className="text-2xl text-green-600">₹.{stack.totalPrice}</span></p>
+          <p className="text-xl">Amount to pay : <span className="text-2xl text-green-600">₹{stack.totalPrice}</span></p>
         </div>
       </div>
 
