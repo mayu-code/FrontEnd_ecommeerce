@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import OrderItem from "./OrderItem";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { GetUserProfile } from "../../redux/auth/auth.action";
@@ -178,7 +177,6 @@ const Profile = () => {
         )}
         <hr />
       </section>
-
 
 
       {/* Cart Section */}
