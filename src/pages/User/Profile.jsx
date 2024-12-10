@@ -161,7 +161,7 @@ const Profile = () => {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {orders.map((order, index) => (
-                  <tr key={index} className="hover:bg-gray-100">
+                  <tr key={index}>
                     <td className="px-4 py-2">{order.orderId}</td>
                     <td className="px-4 py-2">{order.orderStatus}</td>
                     <td className="px-4 py-2">{order.orderDate}</td>
@@ -170,8 +170,9 @@ const Profile = () => {
                     <td className="px-4 py-2">₹{order.totalPaid}</td>
                     <td className="px-4 py-2">{order.transitionId}</td>
                     <td className="px-4 py-2">
-                      <Link to={`/user/viewOrderdItem`} state={{ order }}>
-                      <IoEyeSharp size={24}/>
+                      <Link to={`/user/viewOrderdItem`} state={{ order }} className="flex gap-1 hover:text-blue-600">
+                        <IoEyeSharp className="text-green-600" size={24} />
+                        <p>View</p>
                       </Link>
                     </td>
 
