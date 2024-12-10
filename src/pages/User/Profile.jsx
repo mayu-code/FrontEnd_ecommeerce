@@ -155,6 +155,7 @@ const Profile = () => {
                   <th className="px-4 py-2 text-left">Shipping Address</th>
                   <th className="px-4 py-2 text-left">Total Paid</th>
                   <th className="px-4 py-2 text-left">Transaction ID</th>
+                  <th className="px-4 py-2 text-left">View</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -167,6 +168,12 @@ const Profile = () => {
                     <td className="px-4 py-2">{order.shippingAddress}</td>
                     <td className="px-4 py-2">₹{order.totalPaid}</td>
                     <td className="px-4 py-2">{order.transitionId}</td>
+                    <td className="px-4 py-2">
+                      <Link to={`/user/viewOrderdItem`} state={{ order }}>
+                      view
+                      </Link>
+                    </td>
+
                   </tr>
                 ))}
               </tbody>

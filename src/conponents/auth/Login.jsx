@@ -51,7 +51,7 @@ const Login = () => {
                 // Redirect to homepage after successful login
                 setTimeout(() => {
                   navigate("/"); // Redirect to the home page
-                }, 2000); // Wait 2 seconds before redirecting
+                }, 20); // Wait 2 seconds before redirecting
 
                 setSubmitting(false);
               })
