@@ -28,25 +28,33 @@ function OrderProductView() {
 
   return (
     <>
-      <div className='mt-4'>
-        <p className="px-4 py-2">{order.orderId}</p>
-        <p className="px-4 py-2">{order.orderStatus}</p>
-        <p className="px-4 py-2">{order.orderDate}</p>
-        <p className="px-4 py-2">{order.paymentMethod}</p>
-        <p className="px-4 py-2">{order.shippingAddress}</p>
-        <p className="px-4 py-2">₹{order.totalPaid}</p>
-        <p className="px-4 py-2">{order.transitionId}</p>
-      </div>
-      <div className="mt-4">
-        {stack?.mycart?.length > 0 ? (
-          <div className="mt-4">
-            {stack.mycart.map((item, index) => (
-              <OrderItem key={index} item={item} id={stack.stackId} />
-            ))}
+      <div className='max-w-7xl mx-auto'>
+
+        <section className='mt-10 p-10 flex flex-col gap-4 border border-gray-200 shadow-md'>
+
+          <div className='flex flex-col gap-6'>
+            <h3 className='text-3xl font-semibold'>Order Details</h3>
+            <p className="text-xl font-semibold">Order id: <span className='font-normal'>{order.orderId}</span></p>
+            <p className="text-xl font-semibold">Status: <span className='font-normal'>{order.orderStatus}</span></p>
+            <p className="text-xl font-semibold">Order Date: <span className='font-normal'>{order.orderDate}</span></p>
+            <p className="text-xl font-semibold">Payment Method: <span className='font-normal'>{order.paymentMethod}</span></p>
+            <p className="text-xl font-semibold">Delivered Address: <span className='font-normal'>{order.shippingAddress}</span></p>
+            <p className="text-xl font-semibold">Transition id: <span className='font-normal'>{order.transitionId}</span></p>
           </div>
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
+          <div>
+            {stack?.mycart?.length > 0 ? (
+              <div className="mt-4">
+                <h3 className='text-2xl font-semibold'>Ordered Products</h3>
+                {stack.mycart.map((item, index) => (
+                  <OrderItem key={index} item={item} id={stack.stackId} />
+                ))}
+              </div>
+            ) : (
+              <p>Your cart is empty.</p>
+            )}
+          </div>
+          <p className="text-2xl font-semibold">Total Amount Paid: <span className='font-normal text-green-600 text-3xl'>₹{order.totalPaid}</span></p>
+        </section>
       </div>
     </>
   )
