@@ -9,7 +9,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const [product,setProduct] = useState([]);
-  const [quantity,setQuantity] = useState([]);
+  const [quantity,setQuantity] = useState(1);
 
   useEffect(() => {
     loadProducts();

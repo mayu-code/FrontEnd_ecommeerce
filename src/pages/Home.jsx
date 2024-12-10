@@ -14,6 +14,7 @@ import Footer from './Footer'
 
 import UpdateProfile from '../conponents/auth/UpdateProfile'
 import ProductDetail from './Product/ProductDetail'
+import ProceedToPay from './Product/ProceedToPay'
 
 
 function Home() {
@@ -45,6 +46,7 @@ function Home() {
               <Route path="/user/profile" element={<Profile />} />
               <Route path="/user/updateProfile" element={<UpdateProfile />} />
               <Route path="/user/account" element={<UserAccount />} />
+              <Route path="user/profile/procedePay" element={<ProceedToPay/>}/>
             </>
           ) : (
             <Route path="/user/*" element={<HomePage />} />
