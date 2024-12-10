@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const OrderItem = ({ order }) => {
 
-const jwt = localStorage.getItem("jwt")
-const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt")
+  const navigate = useNavigate();
 
   const removeOrderHandler = async () => {
     try {
@@ -29,27 +29,20 @@ const navigate = useNavigate();
     <div className="border-b py-4">
       <div className='flex justify-between'>
 
-        <div className="mt-2 flex flex-row gap-1">
-          <div>
+        <div className="mt-2 flex flex-col gap-1">
 
-            <p>{order.id}.</p>
-          </div>
-          <div>
+          <p>{order.orderId}</p>
 
-            <h4 className='capitalize font-semibold'>{order.name}</h4>
-            <p className='capitalize'>{order.brand}</p>
-            <p className='capitalize'>{order.features}</p>
-          </div>
+
+          <p className='capitalize'>{order.orderStatus}</p>
+          <p className='capitalize'>{order.orderDate}</p>
+          <p className='capitalize'>{order.paymentMethod}</p>
+          <p className='capitalize'>{order.shippingAddress}</p>
+          <p className='capitalize'>{order.totalPaid}</p>
+          <p className='capitalize'>{order.transitionId}</p>
         </div>
-        <div>
-          <button 
-          onClick={removeOrderHandler}
-          className='bg-red-600 text-white px-3 py-1 rounded-sm text-lg hover:bg-red-700'>
-            Cancel
-          </button>
-        </div>
+
       </div>
-      <p className="mt-2 text-right font-bold">Price: ₹{order.price}</p>
     </div>
   );
 };

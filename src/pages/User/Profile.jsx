@@ -21,7 +21,7 @@ const Profile = () => {
   const [stack, setStack] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user1, setUser1] = useState(null);
-  const [orders,setOrders]= useState([]);
+  const [orders, setOrders] = useState([]);
 
   // Fetch user profile on component mount
   useEffect(() => {
@@ -57,15 +57,15 @@ const Profile = () => {
     setStack(result.data.data);
   };
 
-  const loadOrders = async()=>{
-      const result = await axios.get(`${API_BASE_URL}/user/orders`,
+  const loadOrders = async () => {
+    const result = await axios.get(`${API_BASE_URL}/user/orders`,
       {
-        headers:{
-          "Authorization":`Bearer ${jwt}`
+        headers: {
+          "Authorization": `Bearer ${jwt}`
         }
       })
-      setOrders(result.data.data)
-      console.log(result.data.data)
+    setOrders(result.data.data)
+    console.log(result.data.data)
   }
 
 
@@ -80,8 +80,8 @@ const Profile = () => {
     window.location.reload();
   };
 
-  const placeOrderHandler=()=>{
-    navigate("procedePay",{state:stack})
+  const placeOrderHandler = () => {
+    navigate("procedePay", { state: stack })
   }
 
 
@@ -146,16 +146,41 @@ const Profile = () => {
       <section className="bg-white shadow-md rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold">My Orders</h2>
         {orders.length > 0 ? (
-          <div className="mt-4">
-            {orders.map((order, index) => (
-              <OrderItem key={index} order={order} />
-            ))}
+          <div className="mt-4 overflow-x-auto">
+            <table className="table-auto w-full">
+              <thead className="bg-gray-300">
+                <tr>
+                  <th className="px-4 py-2 text-left">Order ID</th>
+                  <th className="px-4 py-2 text-left">Status</th>
+                  <th className="px-4 py-2 text-left">Order Date</th>
+                  <th className="px-4 py-2 text-left">Payment Method</th>
+                  <th className="px-4 py-2 text-left">Shipping Address</th>
+                  <th className="px-4 py-2 text-left">Total Paid</th>
+                  <th className="px-4 py-2 text-left">Transaction ID</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {orders.map((order, index) => (
+                  <tr key={index} className="hover:bg-gray-100">
+                    <td className="px-4 py-2">{order.orderId}</td>
+                    <td className="px-4 py-2">{order.orderStatus}</td>
+                    <td className="px-4 py-2">{order.orderDate}</td>
+                    <td className="px-4 py-2">{order.paymentMethod}</td>
+                    <td className="px-4 py-2">{order.shippingAddress}</td>
+                    <td className="px-4 py-2">₹{order.totalPaid}</td>
+                    <td className="px-4 py-2">{order.transitionId}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
           <p>No orders found.</p>
         )}
         <hr />
       </section>
+
+
 
       {/* Cart Section */}
       <section className="bg-white shadow-md rounded-lg p-6">
@@ -173,20 +198,20 @@ const Profile = () => {
         </div>
         {stack?.mycart?.length > 0 ? (
           <>
-              <div className='flex flex-row justify-center items-center'>
+            <div className='flex flex-row justify-center items-center'>
               <p>Total Price : ₹{stack.totalPrice}</p>
-            <button
-              onClick={placeOrderHandler}
-              className="ml-4 h-1/2 bg-green-700 text-white px-2 rounded hover:bg-green-800"
-            >
-              Place Order
-            </button>
+              <button
+                onClick={placeOrderHandler}
+                className="ml-4 h-1/2 bg-green-700 text-white px-2 rounded hover:bg-green-800"
+              >
+                Place Order
+              </button>
             </div>
             <hr />
-            </>
+          </>
         ) : (
-              <span></span>
-            )
+          <span></span>
+        )
         }
       </section>
     </div>
