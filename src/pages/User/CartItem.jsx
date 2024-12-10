@@ -54,7 +54,6 @@ const CartItem = ({ item, id }) => {
           <img src={item.product.imgUrl} alt="image" className='w-52' />
         </div>
         <div>
-          <h4 className="font-semibold capitalize">{item.product.name}</h4>
           <p className='capitalize'><span className='font-semibold'>Brand</span>: {item.product.brand}</p> {/* Display brand instead of quantity if it's a brand */}
           <p className='capitalize font-semibold'>Price: <span className='text-green-700'>₹ {item.product.price}</span> </p>
           <p className='capitalize font-semibold'>quantity: <span className='text-green-700'>{item.quantity}</span> </p>
