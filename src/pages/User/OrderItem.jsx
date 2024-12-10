@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const OrderItem = ({ order }) => {
 
-const jwt = localStorage.getItem("jwt")
-const navigate = useNavigate();
+  const jwt = localStorage.getItem("jwt")
+  const navigate = useNavigate();
 
   const removeOrderHandler = async () => {
     try {
@@ -29,28 +29,22 @@ const navigate = useNavigate();
     <div className="border-b py-4">
       <div className='flex justify-between'>
 
-        <div className="mt-2 flex flex-row gap-1">
-          <div>
+        <div className="mt-2 flex flex-col gap-1">
 
-            <p>{order.id}.</p>
-          </div>
-          <div>
+          <p>{order.orderId}</p>
 
-            <h4 className='capitalize font-semibold'>{order.orderId}</h4>
-            <p className='capitalize'>{order.brand}</p>
-            <p className='capitalize'>{order.features}</p>
-          </div>
+          <p>{order.id}.</p>
         </div>
         <div>
-          <button 
-          onClick={removeOrderHandler}
-          className='bg-red-600 text-white px-3 py-1 rounded-sm text-lg hover:bg-red-700'>
-            Cancel
-          </button>
+
+          <h4 className='capitalize font-semibold'>{order.name}</h4>
+          <p className='capitalize'>{order.brand}</p>
+          <p className='capitalize'>{order.features}</p>
         </div>
       </div>
-      <p className="mt-2 text-right font-bold">Price: ₹{order.price}</p>
+
     </div>
+    </div >
   );
 };
 
