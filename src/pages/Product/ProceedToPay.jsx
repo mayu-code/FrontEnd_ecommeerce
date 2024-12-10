@@ -68,25 +68,24 @@ const ProceedToPay = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-gray-100 rounded-md shadow-md">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Proceed to Pay</h1>
+    <div className="max-w-3xl mx-auto my-12 p-6 bg-gray-100 rounded-md shadow-md">
 
       {/* Product Summary */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-700">Order Summary</h2>
+        <h2 className="text-2xl font-semibold text-black">Order Summary</h2>
         <div className="mt-4">
           {stack.mycart?.length > 0 ? (
             <div className="mt-4">
               {stack.mycart.map((item, index) => (
-                <CartItem1 key={index} item={item} id={stack.stackId} />
+                <CartItem1 key={index} item={item} index={index} id={stack.stackId} />
               ))}
             </div>
           ) : (
             <p>Your cart is empty.</p>
           )}
         </div>
-        <div>
-          <p>Total Price : ₹{stack.totalPrice}</p>
+        <div className="flex justify-end mt-5">
+          <p className="text-xl">Amount to pay : <span className="text-2xl text-green-600">₹.{stack.totalPrice}</span></p>
         </div>
       </div>
 
@@ -102,20 +101,21 @@ const ProceedToPay = () => {
           onChange={(e) => setAddress(e.target.value)}
           className="w-full mt-2 p-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Enter your delivery address"
+          required="true"
         ></textarea>
       </div>
 
       {/* Payment Method */}
       <div className="mb-6">
         <h2 className="text-gray-700 font-medium">Select Payment Method</h2>
-        <div className="mt-2 flex items-center space-x-4">
+        <div className="mt-4 flex flex-col gap-2">
           <label className="flex items-center space-x-2">
             <input
               type="radio"
               value="COD"
               checked={paymentMethod === "COD"}
               onChange={(e) => setPaymentMethod(e.target.value)}
-              className="focus:ring-2 focus:ring-blue-400"
+              className="focus:ring-2 focus:ring-blue-200"
             />
             <span>Cash on Delivery (COD)</span>
           </label>
@@ -125,7 +125,7 @@ const ProceedToPay = () => {
               value="PAYPAL"
               checked={paymentMethod === "PAYPAL"}
               onChange={(e) => setPaymentMethod(e.target.value)}
-              className="focus:ring-2 focus:ring-blue-400"
+              className="focus:ring-2 focus:ring-blue-200"
             />
             <span>PayPal</span>
           </label>
@@ -133,12 +133,12 @@ const ProceedToPay = () => {
       </div>
 
       {/* Proceed Button */}
-      <div className="text-right">
+      <div className="text-center">
         <button
           onClick={placeOrderHandler}
           className="bg-blue-600 text-white px-6 py-2 rounded-md shadow hover:bg-blue-700"
         >
-          Place Order
+          Proceed to pay
         </button>
       </div>
     </div>
