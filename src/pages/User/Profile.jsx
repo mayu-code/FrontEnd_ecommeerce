@@ -65,7 +65,6 @@ const Profile = () => {
         }
       })
     setOrders(result.data.data)
-    console.log(result.data.data)
   }
 
 

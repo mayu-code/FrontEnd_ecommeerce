@@ -44,21 +44,26 @@ const ProductDetail = () => {
   };
 
   const addOrderHandler = async () => {
-    if (jwt == null) {
-      navigate("/login");
+    if (jwt != null) {
+      try {
+        const response = await axios.post(
+          `${API_BASE_URL}/user/addCart/${product.id}/${quantity}`,{}, 
+          {
+            headers: {
+              "Authorization": `Bearer ${jwt}`, 
+            },
+          }
+        );
+
+        const stack = response.data.data;
+        navigate("/user/profile/procedePay", { state:  stack})
+      } catch (error) {
+        alert("You need to login first !");
+        navigate("/login");
+      }
     }
-    try {
-      const response = await axios.post(
-        `${API_BASE_URL}/user/ordered/${product.id}`,{}, 
-        {
-          headers: {
-            "Authorization": `Bearer ${jwt}`, // JWT token for authentication
-          },
-        }
-      );
-      navigate('/user/profile');
-    } catch (error) {
-      alert("You need to login First !");
+    else {
+      alert("You need to login first !");
       navigate("/login");
     }
   };
