@@ -198,16 +198,15 @@ const Profile = () => {
         </div>
         {stack?.mycart?.length > 0 ? (
           <>
-            <div className='flex flex-row justify-center items-center'>
-              <p>Total Price : ₹{stack.totalPrice}</p>
+            <div className='flex flex-col gap-6 justify-start items-start'>
+              <p className="mt-5 text-xl"> Payable Amount : <span className="font-semibold text-green-600 text-2xl">₹{stack.totalPrice}</span></p>
               <button
                 onClick={placeOrderHandler}
-                className="ml-4 h-1/2 bg-green-700 text-white px-2 rounded hover:bg-green-800"
+                className="p-3 bg-green-700 text-white px-2 rounded hover:bg-green-800"
               >
                 Place Order
               </button>
             </div>
-            <hr />
           </>
         ) : (
           <span></span>
