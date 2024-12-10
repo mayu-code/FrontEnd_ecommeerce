@@ -3,7 +3,7 @@ import React from 'react';
 import { API_BASE_URL } from '../../config/api';
 import { useNavigate } from 'react-router-dom';
 
-const CartItem1 = ({ item, id }) => {
+const CartItem1 = ({ item, id, index }) => {
 
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
@@ -28,13 +28,12 @@ const CartItem1 = ({ item, id }) => {
 
   return (
     <div className="border-b py-4 flex flex-row justify-between">
-      <div className='flex flex-row gap-1'>
-        <div>
-        </div>
-        <div>
-          <h4 className="font-semibold capitalize">{item.product.name}X{item.quantity}</h4>
-          <p className='capitalize font-semibold'>Price: <span className='text-green-700'>₹ {item.product.price}</span> </p>
-        </div>
+      <div className='flex flex-row gap-2'>
+        <p>{index + 1}.</p>
+        <h4 className="font-semibold capitalize">{item.product.name} X {item.quantity}</h4>
+      </div>
+      <div>
+        <p className='capitalize font-semibold'>Price: <span className='text-green-700'>₹ {item.product.price}</span> </p>
       </div>
     </div>
   );

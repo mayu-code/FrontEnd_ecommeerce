@@ -44,7 +44,6 @@ const OrderItem = ({ order }) => {
       </div>
 
     </div>
-    </div >
   );
 };
 
