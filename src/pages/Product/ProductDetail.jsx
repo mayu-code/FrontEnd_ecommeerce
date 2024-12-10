@@ -9,6 +9,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const jwt = localStorage.getItem("jwt");
   const [product,setProduct] = useState([]);
+  const [quantity,setQuantity] = useState([]);
 
   useEffect(() => {
     loadProducts();
@@ -23,7 +24,7 @@ const ProductDetail = () => {
     if (jwt != null) {
       try {
         const response = await axios.post(
-          `${API_BASE_URL}/user/addCart/${product.id}`,{}, 
+          `${API_BASE_URL}/user/addCart/${product.id}/${quantity}`,{}, 
           {
             headers: {
               "Authorization": `Bearer ${jwt}`, 
@@ -84,6 +85,23 @@ const ProductDetail = () => {
             <span className="text-xl font-semibold text-green-600">
               ₹{product.price}
             </span>
+          </div>
+          <div className="mt-4">
+            <label htmlFor="quantity" className="text-gray-700 font-medium">
+              Quantity:
+            </label>
+            <select
+              id="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(parseInt(e.target.value))}
+              className="ml-2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              {[...Array(10).keys()].map((q) => (
+                <option key={q + 1} value={q + 1}>
+                  {q + 1}
+                </option>
+              ))}
+            </select>
           </div>
           {/* Add to Cart & Buy Now */}
           <div className="mt-6 flex space-x-4">

@@ -14,9 +14,8 @@ const Profile = () => {
   const { auth } = useSelector((store) => store);
   const dispatch = useDispatch();
   const jwt = localStorage.getItem("jwt");
-  const [cproducts, setcProducts] = useState([]);
   const [addresses, setAddresses] = useState([]);
-  const [oproducts, setOproducts] = useState([]);
+  const [stack, setStack] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user1, setUser1] = useState(null);
@@ -40,33 +39,20 @@ const Profile = () => {
     }
   }, [auth.user]);
 
-
-
   useEffect(() => {
-    loadcProducts();
-    loadOproducts();
+    loadStack();
   }, [])
 
-  const loadcProducts = async () => {
-    const result = await axios.get(`${API_BASE_URL}/user/cartproducts`,
+  const loadStack = async () => {
+    const result = await axios.get(`${API_BASE_URL}/user/getCart`,
       {
         headers: {
           "Authorization": `Bearer ${jwt}`
         }
       });
-    setcProducts(result.data.data);
-
+    setStack(result.data.data);
   };
-  const loadOproducts = async () => {
-    const result = await axios.get(`${API_BASE_URL}/user/orderedproducts`,
-      {
-        headers: {
-          "Authorization": `Bearer ${jwt}`
-        }
-      });
-    setOproducts(result.data.data);
 
-  };
 
   const UpdateUser = () => {
     navigate("/user/updateProfile")
@@ -140,7 +126,7 @@ const Profile = () => {
       {/* My Orders Section */}
       <section className="bg-white shadow-md rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold">My Orders</h2>
-        {oproducts.length > 0 ? (
+        {/* {oproducts.length > 0 ? (
           <div className="mt-4">
             {oproducts.map((order, index) => (
               <OrderItem key={index} order={order} />
@@ -148,7 +134,7 @@ const Profile = () => {
           </div>
         ) : (
           <p>No orders found.</p>
-        )}
+        )} */}
         <hr />
       </section>
 
@@ -156,17 +142,32 @@ const Profile = () => {
       <section className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-2xl font-semibold">My Cart</h2>
         <div className="mt-4">
-          {cproducts.length > 0 ? (
+          {stack.mycart.length > 0 ? (
             <div className="mt-4">
-              {cproducts.map((item, index) => (
-                <CartItem key={item.id} item={item} index={index} />
+              {stack.mycart.map((item, index) => (
+                <CartItem key={index} item={item} id={stack.stackId} />
               ))}
             </div>
           ) : (
             <p>Your cart is empty.</p>
           )}
         </div>
-        <hr />
+        {stack.mycart.length > 0 ? (
+          <>
+              <div className='flex flex-row justify-center items-center'>
+              <p>Total Price : ₹{stack.totalPrice}</p>
+            <button
+              className="ml-4 h-1/2 bg-green-700 text-white px-2 rounded hover:bg-green-800"
+            >
+              Buy Now
+            </button>
+            </div>
+            <hr />
+            </>
+        ) : (
+              <span></span>
+            )
+        }
       </section>
     </div>
   );
