@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { API_BASE_URL } from '../../config/api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CartItem = ({ item, id }) => {
 
@@ -49,6 +49,7 @@ const CartItem = ({ item, id }) => {
 
   return (
     <div className="border-b py-4 flex flex-row justify-between">
+      <Link to={`/productDetails/${item.product.id}`}>
       <div className='flex flex-row gap-4'>
         <div>
           <img src={item.product.imgUrl} alt="image" className='w-52' />
@@ -60,7 +61,7 @@ const CartItem = ({ item, id }) => {
           <p className='capitalize font-semibold'>Total Price: <span className='text-green-700'>₹ {item.price}</span> </p>
         </div>
       </div>
-
+      </Link>
       <div className='flex flex-row justify-center items-center'>
         <button
           onClick={removeCartHandler}
