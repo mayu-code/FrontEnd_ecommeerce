@@ -9,8 +9,6 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const Nav = () => {
 
-
-  const { auth } = useSelector(store => store)
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
 

@@ -18,7 +18,7 @@ import ProceedToPay from './Product/ProceedToPay'
 
 
 function Home() {
-  const { auth } = useSelector(store => store)
+  const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch()
   const jwt = localStorage.getItem("jwt")
 

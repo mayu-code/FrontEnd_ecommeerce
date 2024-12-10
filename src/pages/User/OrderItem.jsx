@@ -36,7 +36,7 @@ const navigate = useNavigate();
           </div>
           <div>
 
-            <h4 className='capitalize font-semibold'>{order.name}</h4>
+            <h4 className='capitalize font-semibold'>{order.orderId}</h4>
             <p className='capitalize'>{order.brand}</p>
             <p className='capitalize'>{order.features}</p>
           </div>
